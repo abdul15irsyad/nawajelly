@@ -100,9 +100,15 @@ $(document).ready(function(){
   }
 
   // Smooth scroll for the menu and links with .scrollto classes
-  $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
+  $('.nav-menu a, #mobile-nav a, .scrollto, .btn-buy').on('click', function() {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
+      var temp = 0;
+      if(this.hash=="#varian"){
+        temp=120;
+      }else if(this.hash=="#infoagen"){
+        temp=100;
+      }
       if (target.length) {
         var top_space = 0;
 
@@ -115,7 +121,7 @@ $(document).ready(function(){
         }
 
         $('html, body').animate({
-          scrollTop: target.offset().top - top_space
+          scrollTop: target.offset().top - top_space + temp
         }, 1500, 'easeInOutExpo');
 
         if ($(this).parents('.nav-menu').length) {
@@ -125,7 +131,8 @@ $(document).ready(function(){
 
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          $('#mobile-nav-toggle i').toggleClass('lnr-times lnr-bars');
+          $('#mobile-nav-toggle i').removeClass('lnr-cross lnr-times lnr-bars');
+          $('#mobile-nav-toggle i').addClass('lnr-menu');
           $('#mobile-body-overly').fadeOut();
         }
         return false;
